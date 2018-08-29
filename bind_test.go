@@ -152,6 +152,32 @@ func TestBindQueryParams(t *testing.T) {
 	}
 }
 
+func TestBindQueryParamsCaseInsensitive(t *testing.T) {
+	e := New()
+	req := httptest.NewRequest(GET, "/?ID=1&NAME=Jon+Snow", nil)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	u := new(user)
+	err := c.Bind(u)
+	if assert.NoError(t, err) {
+		assert.Equal(t, 1, u.ID)
+		assert.Equal(t, "Jon Snow", u.Name)
+	}
+}
+
+func TestBindQueryParamsCaseSensitivePrioritized(t *testing.T) {
+	e := New()
+	req := httptest.NewRequest(GET, "/?id=1&ID=2&NAME=Jon+Snow&name=Jon+Doe", nil)
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+	u := new(user)
+	err := c.Bind(u)
+	if assert.NoError(t, err) {
+		assert.Equal(t, 1, u.ID)
+		assert.Equal(t, "Jon Doe", u.Name)
+	}
+}
+
 func TestBindUnmarshalParam(t *testing.T) {
 	e := New()
 	req := httptest.NewRequest(GET, "/?ts=2016-12-06T19:09:05Z&sa=one,two,three&ta=2016-12-06T19:09:05Z&ta=2016-12-06T19:09:05Z&ST=baz", nil)
