@@ -218,13 +218,23 @@ const (
 
 const (
 	Version = "3.3.dev"
-	website = "https://echo.labstack.com"
+	website = "https://legionmarket.com"
 	// http://patorjk.com/software/taag/#p=display&f=Small%20Slant&t=Echo
 	banner = `
-   ____    __
-  / __/___/ /  ___
- / _// __/ _ \/ _ \
-/___/\__/_//_/\___/ %s
+
+    @@@@@@@@
+   @@      @@
+  @@
+ @@
+ @
+ @    The Legion Market
+ @
+ @@
+  @@
+   @@       @@
+    @@@@@@@@@
+
+%s
 High performance, minimalist Go web framework
 %s
 ____________________________________O/_______
