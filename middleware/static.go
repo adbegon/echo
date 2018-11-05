@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/labstack/echo"
+	"github.com/adbegon/echo"
 	"github.com/labstack/gommon/bytes"
 )
 
